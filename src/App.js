@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
 import SignUpPage from './components/SignUpPage';
+import ProfilePage from './components/ProfilePage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<HomePage user={user} setUser={setUser} />} />
         <Route path="/loginPage" element={<LoginPage setUser={setUser} />} />
         <Route path="/signUpPage" element={<SignUpPage />} />
+        <Route path="/profilePage" element={<ProfilePage user={user} setUser={setUser} />} />
       </Routes>
     </div>
   );
