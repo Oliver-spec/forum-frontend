@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import './LoginPage.css';
 
 function LoginPage({ setUser }) {
   const [username, setUsername] = useState('');
@@ -16,6 +17,9 @@ function LoginPage({ setUser }) {
 
     if (!(res.data instanceof Object)) {
       setLoginNotice(res.data);
+      setUsername('');
+      setPassword('');
+
       return;
     }
 
@@ -28,21 +32,27 @@ function LoginPage({ setUser }) {
   };
 
   return (
-    <div>
-      <Link to="/">Home</Link>
-      <div>Login</div>
-      <div>{loginNotice}</div>
-      <form onSubmit={sendLoginRequest}>
-        <div>
-          Username:
-          <input type="text" value={username} onChange={(event) => { setUsername(event.target.value); }} />
+    <div className="root-container">
+      <form onSubmit={sendLoginRequest} className="login-form">
+        <div className="input-container">
+          <div className="input-description">Username</div>
+          {loginNotice
+            ? <input className="login-input-red" type="text" value={username} onChange={(event) => { setUsername(event.target.value); }} />
+            : <input className="login-input" type="text" value={username} onChange={(event) => { setUsername(event.target.value); }} />}
         </div>
-        <div>
-          Password:
-          <input type="password" value={password} onChange={(event) => { setPassword(event.target.value); }} />
+        <div className="input-container">
+          <div className="input-description">Password</div>
+          {loginNotice
+            ? <input className="login-input-red" type="password" value={password} onChange={(event) => { setPassword(event.target.value); }} />
+            : <input className="login-input" type="password" value={password} onChange={(event) => { setPassword(event.target.value); }} />}
         </div>
-        <button type="submit">Login</button>
+        <div className="login-notice">{loginNotice}</div>
+        <button type="submit" className="login-button">Login</button>
       </form>
+      <div className="links-container">
+        <div className="link"><Link to="/">Home</Link></div>
+        <div className="link"><Link to="/signUpPage">Sign Up</Link></div>
+      </div>
     </div>
   );
 }
