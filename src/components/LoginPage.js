@@ -1,11 +1,13 @@
 import { React, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
-function LoginPage({ user, setUser }) {
+function LoginPage({ setUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginNotice, setLoginNotice] = useState('');
+
+  const navigate = useNavigate();
 
   const sendLoginRequest = async (event) => {
     event.preventDefault();
@@ -17,13 +19,16 @@ function LoginPage({ user, setUser }) {
       return;
     }
 
+    localStorage.setItem('forumLoggedInUser', JSON.stringify(res.data));
+
     setUser(res.data);
     setLoginNotice('');
+
+    navigate('/');
   };
 
   return (
     <div>
-      {user ? <div>{user.username}</div> : <div>Register placeholder</div>}
       <Link to="/">Home</Link>
       <div>Login</div>
       <div>{loginNotice}</div>
