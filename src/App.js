@@ -4,6 +4,7 @@ import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
 import SignUpPage from './components/SignUpPage';
 import ProfilePage from './components/ProfilePage';
+import './App.css';
 
 function App() {
   const [user, setUser] = useState(null);

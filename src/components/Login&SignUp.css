@@ -1,18 +1,14 @@
-* {
-  padding: 0;
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-}
-
 .root-container {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: whitesmoke;
 }
 
 .login-form {
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,6 +21,12 @@
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 }
 
+.input-container-sign-up {
+  margin-bottom: 3%;
+  width: 90%;
+  height: 20%;
+}
+
 .input-container {
   margin-bottom: 3%;
   width: 90%;
@@ -34,35 +36,35 @@
 .login-input {
   width: 90%;
   height: 20%;
-  font-size: 22px;
+  font-size: 18px;
   border-radius: 5px;
   padding: 3%;
   margin-top: 1%;
   border: solid;
   border-color: black;
+  border-width: 2px;
 }
 
 .login-input:focus {
-  outline-style: solid;
-  outline-color: rgb(222, 214, 214);
-  outline-width: 3px;
+  border-color: rgb(92, 92, 205);
+  outline-style: none;
 }
 
 .login-input-red {
   width: 90%;
   height: 20%;
-  font-size: 22px;
+  font-size: 18px;
   border-radius: 5px;
   padding: 3%;
   margin-top: 1%;
   border: solid;
   border-color: red;
+  border-width: 2px;
 }
 
 .login-input-red:focus {
-  outline-style: solid;
-  outline-color: rgb(230, 170, 170);
-  outline-width: 3px;
+  outline-style: none;
+  border-color: rgb(92, 92, 205);
 }
 
 .input-description {
@@ -98,18 +100,4 @@
 .login-notice {
   color: red;
   margin-bottom: 1%;
-}
-
-a:link {
-  color: black;
-  text-decoration: none;
-}
-
-a:visited {
-  color: black;
-}
-
-a:hover {
-  color: black;
-  text-decoration: underline;
 }

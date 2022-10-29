@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './Login&SignUp.css';
 
 function SignUpPage() {
   const [username, setUsername] = useState('');
@@ -14,7 +15,11 @@ function SignUpPage() {
     event.preventDefault();
 
     if (password !== repeatPassword) {
-      setSignUpNotice('Password does not match with repeated password');
+      setSignUpNotice('Passwords does not match');
+
+      setPassword('');
+      setRepeatPassword('');
+
       return;
     }
 
@@ -22,6 +27,11 @@ function SignUpPage() {
 
     if (res.data !== 'Sign up successful') {
       setSignUpNotice(res.data);
+
+      setUsername('');
+      setPassword('');
+      setRepeatPassword('');
+
       return;
     }
 
@@ -31,26 +41,30 @@ function SignUpPage() {
   };
 
   return (
-    <div>
-      <div><Link to="/">Home</Link></div>
-      <div><Link to="/loginPage">Login</Link></div>
-      <div>Sign Up</div>
-      <div>{signUpNotice}</div>
-      <form onSubmit={sendSignUpRequest}>
-        <div>
-          Username:
-          <input type="text" value={username} onChange={(event) => { setUsername(event.target.value); }} />
+    <div className="root-container">
+      <form onSubmit={sendSignUpRequest} className="login-form">
+        <div className="input-container-sign-up">
+          <div className="input-description">Username</div>
+          {signUpNotice ? <input className="login-input-red" type="text" value={username} onChange={(event) => { setUsername(event.target.value); }} />
+            : <input className="login-input" type="text" value={username} onChange={(event) => { setUsername(event.target.value); }} />}
         </div>
-        <div>
-          Password:
-          <input type="password" value={password} onChange={(event) => { setPassword(event.target.value); }} />
+        <div className="input-container-sign-up">
+          <div className="input-description">Password</div>
+          {signUpNotice ? <input className="login-input-red" type="password" value={password} onChange={(event) => { setPassword(event.target.value); }} />
+            : <input className="login-input" type="password" value={password} onChange={(event) => { setPassword(event.target.value); }} />}
         </div>
-        <div>
-          Repeat Password:
-          <input type="password" value={repeatPassword} onChange={(event) => { setRepeatPassword(event.target.value); }} />
+        <div className="input-container-sign-up">
+          <div className="input-description">Repeat Password</div>
+          {signUpNotice ? <input className="login-input-red" type="password" value={repeatPassword} onChange={(event) => { setRepeatPassword(event.target.value); }} />
+            : <input className="login-input" type="password" value={repeatPassword} onChange={(event) => { setRepeatPassword(event.target.value); }} />}
         </div>
-        <button type="submit">Sign Up</button>
+        <div className="login-notice">{signUpNotice}</div>
+        <button type="submit" className="login-button">Sign Up</button>
       </form>
+      <div className="links-container">
+        <div className="link"><Link to="/">Home</Link></div>
+        <div className="link"><Link to="/loginPage">Login</Link></div>
+      </div>
     </div>
   );
 }
