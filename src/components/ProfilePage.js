@@ -1,7 +1,10 @@
-import { React } from 'react';
+import { React, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import DelUserModal from './DelUserModal';
 
 function ProfilePage({ user, setUser }) {
+  const [modalOpen, setModalOpen] = useState(false);
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -21,7 +24,14 @@ function ProfilePage({ user, setUser }) {
           {' '}
           {user.username}
         </div>
-        <button onClick={handleLogout} type="submit">Logout</button>
+        <button onClick={handleLogout} type="button">Logout</button>
+        <button onClick={() => { setModalOpen(true); }} type="button">Delete Account</button>
+        <DelUserModal
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          user={user}
+          handleLogout={handleLogout}
+        />
       </div>
     );
   }
