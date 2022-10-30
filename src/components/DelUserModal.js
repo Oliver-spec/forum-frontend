@@ -15,21 +15,23 @@ function DelUserModal({
 
     if (res.data === 'User deleted') {
       handleLogout();
+      return;
     }
 
     setDelNotice(res.data);
+    setPassword('');
   };
 
   if (modalOpen) {
     return (
       <div className="modal-background">
         <div className="modal-container">
-          <form onSubmit={sendDelUserRequest}>
-            <input type="password" onChange={(event) => { setPassword(event.target.value); }} value={password} placeholder="Password" />
-            <button type="submit">DELETE ACCOUNT</button>
-            <button onClick={() => { setModalOpen(false); }} type="button">Cancel</button>
+          <button className="cancel-button" onClick={() => { setModalOpen(false); }} type="button">X</button>
+          <form onSubmit={sendDelUserRequest} className="form">
+            <input className="del-user-pw-input" type="password" onChange={(event) => { setPassword(event.target.value); }} value={password} placeholder="Password" />
+            <button className="del-btn" type="submit">DELETE ACCOUNT</button>
           </form>
-          <div>{delNotice}</div>
+          <div className="del-notice">{delNotice}</div>
         </div>
       </div>
     );
