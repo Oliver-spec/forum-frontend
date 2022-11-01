@@ -3,32 +3,27 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import './Login&SignUp.css';
 
-function LoginPage({ setUser }) {
+function LoginPage({ setUser, loginNotice, setLoginNotice }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loginNotice, setLoginNotice] = useState('');
 
   const navigate = useNavigate();
 
   const sendLoginRequest = async (event) => {
     event.preventDefault();
 
-    const res = await axios.post('http://localhost:3001/login', { username, password });
+    try {
+      const res = await axios.post('http://localhost:3001/api/login', { username, password });
 
-    if (!(res.data instanceof Object)) {
-      setLoginNotice(res.data);
-      setUsername('');
-      setPassword('');
+      localStorage.setItem('forumLoggedInUser', JSON.stringify(res.data));
+      setUser(res.data);
 
-      return;
+      setLoginNotice('');
+
+      navigate('/');
+    } catch (err) {
+      setLoginNotice(err.response.data);
     }
-
-    localStorage.setItem('forumLoggedInUser', JSON.stringify(res.data));
-
-    setUser(res.data);
-    setLoginNotice('');
-
-    navigate('/');
   };
 
   return (

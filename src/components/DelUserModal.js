@@ -11,15 +11,13 @@ function DelUserModal({
   const sendDelUserRequest = async (event) => {
     event.preventDefault();
 
-    const res = await axios.post('http://localhost:3001/deleteUser', { id: user.id, password });
-
-    if (res.data === 'User deleted') {
+    try {
+      await axios.post('http://localhost:3001/api/deleteUser', { id: user.id, password });
       handleLogout();
-      return;
+    } catch (err) {
+      setDelNotice(err.response.data);
+      setPassword('');
     }
-
-    setDelNotice(res.data);
-    setPassword('');
   };
 
   if (modalOpen) {

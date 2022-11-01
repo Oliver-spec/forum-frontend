@@ -75,6 +75,7 @@
   background-color: white;
   border-color: black;
   border-radius: 3px;
+  border-style: solid;
   padding: 3px;
   transition-duration: 0.3s;
   width: 70%;

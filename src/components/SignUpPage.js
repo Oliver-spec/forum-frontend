@@ -23,21 +23,18 @@ function SignUpPage() {
       return;
     }
 
-    const res = await axios.post('http://localhost:3001/register', { username, password });
+    try {
+      await axios.post('http://localhost:3001/api/register', { username, password });
+      setSignUpNotice('');
 
-    if (res.data !== 'Sign up successful') {
-      setSignUpNotice(res.data);
+      navigate('/loginPage');
+    } catch (err) {
+      setSignUpNotice(err.response.data);
 
       setUsername('');
       setPassword('');
       setRepeatPassword('');
-
-      return;
     }
-
-    setSignUpNotice('');
-
-    navigate('/loginPage');
   };
 
   return (
