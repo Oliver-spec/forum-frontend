@@ -61,7 +61,19 @@ function App() {
           }
         />
         {posts.map((post) => (
-          <Route path={`/${post._id}`} element={<PostDetail post={post} />} />
+          <Route
+            key={post._id}
+            path={`/${post._id}`}
+            element={
+              <PostDetail
+                post={post}
+                setUser={setUser}
+                setLoginNotice={setLoginNotice}
+                user={user}
+                setPosts={setPosts}
+              />
+            }
+          />
         ))}
       </Routes>
     </div>

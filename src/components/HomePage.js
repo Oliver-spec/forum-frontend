@@ -53,6 +53,8 @@ function HomePage({ user, posts, setPosts, setLoginNotice }) {
           <div key={post._id}>
             <Link to={`/${post._id}`}>{post.title}</Link>
             <div>{post.authorName}</div>
+            <div>Likes: {post.likes}</div>
+            <div>Dislikes: {post.dislikes}</div>
             <br />
           </div>
         ))}
